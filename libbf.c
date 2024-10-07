@@ -265,12 +265,15 @@ int bf_set_ui(bf_t *r, uint64_t a)
     return BF_ST_MEM_ERROR;
 }
 
-/* return 0 or BF_ST_MEM_ERROR */
 int bf_set_si(bf_t *r, int64_t a)
 {
     int ret;
 
-    if (a < 0) {
+    // Special case as -INT64_MIN is undefined (e.g. on aarc64 leads to traps)
+    if (a == INT64_MIN) {
+        ret = bf_set_ui(r, (uint64_t)INT64_MAX + 1); 
+        r->sign = 1;
+    } else if (a < 0) {
         ret = bf_set_ui(r, -a);
         r->sign = 1;
     } else {
