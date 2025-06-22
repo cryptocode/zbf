@@ -1,7 +1,7 @@
 /*
  * Tiny arbitrary precision floating point library
  *
- * Copyright (c) 2017-2021 Fabrice Bellard
+ * Copyright (c) 2017-2025 Fabrice Bellard
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -522,6 +522,8 @@ int bfdec_pow_ui(bfdec_t *r, const bfdec_t *a, limb_t b);
 char *bfdec_ftoa(size_t *plen, const bfdec_t *a, limb_t prec, bf_flags_t flags);
 int bfdec_atof(bfdec_t *r, const char *str, const char **pnext,
                limb_t prec, bf_flags_t flags);
+int bfdec_to_f(bf_t *r, const bfdec_t *a, limb_t prec, bf_flags_t flags);
+int bfdec_from_f(bfdec_t *r, const bf_t *a, limb_t prec, bf_flags_t flags);
 
 /* the following functions are exported for testing only. */
 extern const limb_t mp_pow_dec[LIMB_DIGITS + 1];
